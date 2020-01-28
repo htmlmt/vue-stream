@@ -1,0 +1,37 @@
+.stream-chat__chat {
+    width: 100%;
+
+    .screen-lg ({
+        width: 390px;
+    });
+}
+
+.streamer__stream-chat {
+    .stream-chat__chat {
+        display: none;
+    }
+}
+
+.streamer__stream-chat.chat {
+    .stream-chat__chat {
+        display: block;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .streamer__stream-chat {
+        .stream-chat__chat {
+            display: block;
+        }
+    }
+
+    .streamer__stream-chat.stream {
+        .stream-chat__chat {
+            display: none;
+        }
+
+        .stream-chat__stream {
+            width: 100%;
+        }
+    }
+}

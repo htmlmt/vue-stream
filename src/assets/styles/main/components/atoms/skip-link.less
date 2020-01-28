@@ -1,0 +1,26 @@
+.skip-link {
+    height: 58px;
+    opacity: 0;
+    position: fixed !important;
+    text-align: center;
+    top: -1000px;
+    width: 300px;
+    z-index: -1;
+
+    &:focus,
+    &:active,
+    &:hover {
+        left: 20px;
+        opacity: 1;
+        position: fixed;
+        top: 20px;
+        z-index: 10000;
+    }
+}
+
+:target::before {
+    content: '';
+    display: block;
+    height: 90px;
+    margin: -90px 0 0;
+}

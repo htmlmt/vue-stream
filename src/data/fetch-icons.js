@@ -1,20 +1,19 @@
-<template>
-    <div id="app">
-        <SkipLink />
-        <Stream />
-    </div>
-</template>
-
-<script>
 import axios from 'axios';
-import SkipLink from '@/components/atoms/SkipLink.vue';
-import Stream from '@/components/stream/Stream.vue';
 
 export default {
-    name: 'App',
-    components: {
-        SkipLink,
-        Stream,
+    data() {
+        return {
+            apiUrl: 'https://api.airtable.com/v0/',
+            apiKey: process.env.VUE_APP_AIRTABLE_API_KEY,
+            icons: [],
+            base: process.env.VUE_APP_AIRTABLE_BASE,
+        };
+    },
+    mounted() {
+        if (!this.base) {
+            return '';
+        }
+        return this.getIcons();
     },
     methods: {
         getIconByName(name) {
@@ -38,15 +37,3 @@ export default {
         },
     },
 };
-</script>
-
-<style lang="less">
-@import './assets/styles/main/normalize.css';
-
-@import './assets/styles/main/variables/fonts';
-@import './assets/styles/main/variables/screen-sizes';
-
-@import './assets/styles/main/mixins/media-queries';
-
-@import './assets/styles/main/app';
-</style>

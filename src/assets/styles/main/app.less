@@ -1,0 +1,106 @@
+html,
+body,
+#app {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: @primaryFont;
+    font-size: 16px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: @headingFont;
+}
+
+a {
+    text-decoration: none;
+}
+
+[v-cloak] {
+    display: none;
+}
+
+:focus {
+    outline: -webkit-focus-ring-color auto 1px;
+}
+
+@font-face {
+    font-family: 'Droid Sans';
+
+    font-display: swap;
+    src: url("../../fonts/DroidSans-Regular.woff") format("woff");
+}
+
+@font-face {
+    font-family: 'Droid Sans';
+    font-weight: 700;
+
+    font-display: swap;
+    src: url("../../fonts/DroidSans-Bold.woff") format("woff");
+}
+
+@font-face {
+    font-family: 'Open Sans';
+
+    font-display: swap;
+    src: url("../../fonts/OpenSans-Regular.woff") format("woff");
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-weight: 700;
+
+    font-display: swap;
+    src: url("../../fonts/OpenSans-Bold.woff") format("woff");
+}
+
+@font-face {
+    font-family: 'Futura LT';
+
+    font-display: swap;
+    src: url("../../fonts/FuturaLT-Book.woff") format("woff");
+}
+
+@font-face {
+    font-family: 'Futura LT';
+    font-weight: 700;
+
+    font-display: swap;
+    src: url("../../fonts/FuturaLT-Bold.woff") format("woff");
+}
+
+.hide-on-mobile {
+    display: none;
+
+    .screen-lg ({
+        display: block;
+    });
+}
+
+.hide-on-desktop {
+    .screen-lg ({
+        display: none;
+    });
+}
+
+.hide-on-mobile-flex {
+    display: none;
+
+    .screen-lg ({
+        display: flex;
+    });
+}
+
+.show-hidden {
+    .hide-on-desktop {
+        display: block;
+    }
+}

@@ -1,0 +1,19 @@
+.min-width(@minWidth; @rules) {
+    @media only screen and (min-width: @minWidth) {
+        @rules();
+    }
+}
+
+.max-width(@maxWidth; @rules) {
+    @media only screen and (max-width: @maxWidth - 1) {
+        @rules();
+    }
+}
+
+.screen-lg(@rules) {
+    .min-width(@screen-lg, { @rules(); })
+}
+
+.screen-lg-max(@rules) {
+    .max-width(@screen-lg, { @rules(); })
+}
