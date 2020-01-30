@@ -2,13 +2,14 @@
     <aside class="streamer__activity-feed">
         <div class="activity-feed__feed">
             <ul class="feed__list">
-                <li v-for="item in items" :key="item.id">
+                <li v-for="item in items" :key="item.createdDateUTC">
                     <div class="item__badge">
-                        <Icon
+                        <img :src="item.imageURL" :alt="item.title">
+                        <!-- <Icon
                         :icon-name="item.icon"
                         >
                             <g v-html="getIconByName(item.icon)"></g>
-                        </Icon>
+                        </Icon> -->
                     </div>
                     <div class="item__description">
                         <p class="description__title">
@@ -18,7 +19,7 @@
                             {{ item.message }}
                         </p>
                         <p class="description__time">
-                            {{ item.time }}
+                            {{ item.createdDateUTC }}
                         </p>
                     </div>
                 </li>
@@ -29,7 +30,7 @@
                 <Icon
                 icon-name="donate"
                 >
-                    <g v-html="getIconByName('donate')"></g>
+                    <!-- <g v-html="getIconByName('donate')"></g> -->
                 </Icon>
             </Button>
         </div>
@@ -44,20 +45,41 @@ import Icon from '@/components/atoms/Icon.vue';
 import Button from '@/components/atoms/Button.vue';
 
 export default {
-    extends: FetchIcons,
+    extends: {
+        FetchIcons,
+    },
     data() {
         return {
-            items: [
-                {
-                    id: 1,
-                    iconType: 'image',
-                    icon: 'recruitment',
-                    title: 'New Team Badge!',
-                    message: 'Recruit 10 Team Members',
-                    time: '105 days',
-                },
-            ],
+            participantID: -1,
         };
+    },
+    computed: {
+        items() {
+            let data = this;
+
+            let result = this.$store.state.data.participants.find(function(object) {
+                return object.participantID === data.participantID;
+            });
+
+            if (!result) {
+                return [];
+            } else {
+                return result.activity;
+            }
+        },
+    },
+    mounted() {
+        let searchParams = new URLSearchParams(window.location.search.substring(1));
+
+        let participantID = searchParams.get('participantID');
+
+        this.participantID = parseInt(participantID);
+
+        if (participantID) {
+            this.$store.commit('fetchParticipantActivity', {
+                participantID: participantID
+            });
+        }
     },
     components: {
         Button,
