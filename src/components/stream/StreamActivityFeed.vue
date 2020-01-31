@@ -4,13 +4,14 @@
             <ul class="feed__list" :style="{ width: ((items.length / 3) * 100) + '%' }">
                 <li :style="{ width: (100 / items.length) + '%' }" v-for="item in items" :key="item.createdDateUTC">
                     <div class="item__badge">
-                        <img :src="item.imageURL" :alt="item.title">
+                        <img v-if="item.type === 'participantBadge'" :src="item.imageURL" :alt="item.title">
+                        <p v-if="item.type === 'donation'"><strong>{{ item.amount | formatMoney }}</strong></p>
                     </div>
                     <div class="item__description">
                         <p class="description__title">
                             <strong>{{ item.title }}</strong>
                         </p>
-                        <p class="description__message">
+                        <p v-if="item.message" class="description__message">
                             {{ item.message }}
                         </p>
                         <p class="description__time">
@@ -40,6 +41,7 @@ import Icon from '@/components/atoms/Icon.vue';
 import Button from '@/components/atoms/Button.vue';
 
 import moment from 'moment';
+import numeral from 'numeral';
 
 export default {
     extends: FetchIcons,
@@ -79,6 +81,9 @@ export default {
     filters: {
         formatDate(date) {
             return moment(date).fromNow();
+        },
+        formatMoney(amount) {
+            return numeral(amount).format('($0a)');
         }
     },
     components: {
