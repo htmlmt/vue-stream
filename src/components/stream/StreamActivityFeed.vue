@@ -1,15 +1,10 @@
 <template lang="html">
     <aside class="streamer__activity-feed">
         <div class="activity-feed__feed">
-            <ul class="feed__list">
-                <li v-for="item in items" :key="item.createdDateUTC">
+            <ul class="feed__list" :style="{ width: ((items.length / 3) * 100) + '%' }">
+                <li :style="{ width: (100 / items.length) + '%' }" v-for="item in items" :key="item.createdDateUTC">
                     <div class="item__badge">
                         <img :src="item.imageURL" :alt="item.title">
-                        <!-- <Icon
-                        :icon-name="item.icon"
-                        >
-                            <g v-html="getIconByName(item.icon)"></g>
-                        </Icon> -->
                     </div>
                     <div class="item__description">
                         <p class="description__title">
@@ -19,7 +14,7 @@
                             {{ item.message }}
                         </p>
                         <p class="description__time">
-                            {{ item.createdDateUTC }}
+                            {{ item.createdDateUTC | formatDate }}
                         </p>
                     </div>
                 </li>
@@ -30,7 +25,7 @@
                 <Icon
                 icon-name="donate"
                 >
-                    <!-- <g v-html="getIconByName('donate')"></g> -->
+                    <g v-html="getIconByName('donate')"></g>
                 </Icon>
             </Button>
         </div>
@@ -44,10 +39,10 @@ import Icon from '@/components/atoms/Icon.vue';
 
 import Button from '@/components/atoms/Button.vue';
 
+import moment from 'moment';
+
 export default {
-    extends: {
-        FetchIcons,
-    },
+    extends: FetchIcons,
     data() {
         return {
             participantID: -1,
@@ -79,6 +74,11 @@ export default {
             this.$store.commit('fetchParticipantActivity', {
                 participantID: participantID
             });
+        }
+    },
+    filters: {
+        formatDate(date) {
+            return moment(date).fromNow();
         }
     },
     components: {
