@@ -1,12 +1,12 @@
 <template lang="html">
     <div @update-tabs="updateTabs" class="stream-chat__chat">
         <iframe
-        frameborder="0"
-        scrolling="yes"
-        :id="channel"
-        :src="chatUrl"
-        height="100%"
-        width="100%"
+            :id="channel"
+            :src="chatUrl"
+            frameborder="0"
+            height="100%"
+            scrolling="yes"
+            width="100%"
         >
         </iframe>
     </div>

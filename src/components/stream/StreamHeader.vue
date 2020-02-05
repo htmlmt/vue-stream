@@ -1,7 +1,7 @@
 <template lang="html">
     <header>
         <div class="header__title">
-            <h1>{{ title }}</h1>
+            <h1 class="font-bold">{{ title }}</h1>
         </div>
         <StreamNavigation
         filter="AND({Instance} = 'demo', {Type} = 'General')"

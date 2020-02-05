@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <SkipLink />
+        <SkipLink content="Skip to main content" />
         <Stream />
     </div>
 </template>
@@ -41,8 +41,6 @@ export default {
 </script>
 
 <style lang="less">
-@import './assets/styles/main/normalize.css';
-
 @import './assets/styles/main/variables/fonts';
 @import './assets/styles/main/variables/screen-sizes';
 

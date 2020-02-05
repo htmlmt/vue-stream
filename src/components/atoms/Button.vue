@@ -1,34 +1,57 @@
 <template lang="html">
-    <a class="button" href="" target="_blank" rel="noopener">
-        <div class="button__icon">
-            <Icon icon-name="donate" icon-color="#ffffff">
-                <g v-html="getIconByName('donate')"></g>
-            </Icon>
-        </div>
-        <span class="button__text">Donate</span>
-    </a>
+	<button
+		@click="showPanels(panelsToShow)"
+		class="
+			block
+			cursor-pointer
+			flex
+			items-center
+			px-2
+			py-3
+			text-gray-700
+			w-full
+
+			lg:px-4
+		"
+	>
+		<slot />
+	</button>
 </template>
 
 <script>
-import FetchIcons from '@/data/fetch-icons';
-import Icon from '@/components/atoms/Icon.vue';
-
 export default {
-    extends: FetchIcons,
-    name: 'Button',
-    components: {
-        Icon,
-    },
-};
+	name: 'Button',
+	methods: {
+        showPanels(panelsToShow) {
+            document.body.classList.toggle('overlay');
+
+            this.$store.commit("updatePanels", panelsToShow);
+        },
+	},
+	props: {
+		panelsToShow: {
+            type: Array,
+        },
+	}
+}
 </script>
 
-<style lang="less">
-@import '../../assets/styles/main/variables/colors';
-@import '../../assets/styles/main/variables/elements';
-@import '../../assets/styles/main/variables/fonts';
+<style scoped lang="less">
 @import '../../assets/styles/main/variables/screen-sizes';
 
 @import '../../assets/styles/main/mixins/media-queries';
 
-@import '../../assets/styles/main/components/atoms/button';
+button {
+	-webkit-appearance: none;
+}
+
+.screen-lg ({
+	button {
+		opacity: 0.25;
+
+		&.active {
+			opacity: 1;
+		}
+	}
+});
 </style>

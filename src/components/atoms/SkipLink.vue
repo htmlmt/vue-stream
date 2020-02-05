@@ -1,12 +1,15 @@
 <template lang="html">
-    <a class="skip-link button" href="#content">
-        Skip to main content
+    <a class="skip-link" href="#content">
+        {{ content }}
     </a>
 </template>
 
 <script>
 export default {
     name: 'SkipLink',
+    props: {
+        content: String,
+    },
 };
 </script>
 

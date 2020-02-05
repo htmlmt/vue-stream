@@ -1,13 +1,12 @@
 module.exports = {
     theme: {
         screens: {
-            'sm': '640px',
-            'md': '768px',
             'lg': '992px',
-            'xl': '1280px',
         },
         fontFamily: {
-            sans: ['Futura LT', 'sans-serif'],
+            primary: ['Droid Sans', 'sans-serif'],
+            secondary: ['Open Sans', 'sans-serif'],
+            display: ['Futura LT', 'sans-serif'],
         },
         colors: {
             gray: {
@@ -18,15 +17,9 @@ module.exports = {
             green: {
                 '400': '#468302',
             },
-        },
-        borderRadius: {
-            'none': '0',
-            'sm': '5px',
-            default: '.25rem',
-            'lg': '.5rem',
-            'full': '9999px',
+            red: {
+                '400': '#d0021b',
+            },
         },
     },
-    variants: {},
-    plugins: []
 }

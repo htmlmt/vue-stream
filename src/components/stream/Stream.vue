@@ -1,5 +1,16 @@
 <template lang="html">
-    <article class="body__streamer">
+    <article
+        class="
+            border
+            border-gray-400
+            flex
+            flex-1
+            flex-col
+            min-h-full
+            overflow-hidden
+            rounded-lg
+        "
+    >
         <StreamHeader title="Stream" />
         <StreamContent channel="drlupo" />
         <StreamActivityFeed filter="AND({Instance} = 'demo', {Type} = 'Badge')" />
@@ -9,7 +20,7 @@
 <script>
 import StreamHeader from '@/components/stream/StreamHeader.vue';
 import StreamContent from '@/components/stream/StreamContent.vue';
-import StreamActivityFeed from '@/components/stream/StreamActivityFeed.vue';
+import StreamActivityFeed from '@/components/stream/activity-feed/StreamActivityFeed.vue';
 
 export default {
     components: {
@@ -19,9 +30,3 @@ export default {
     },
 };
 </script>
-
-<style lang="less">
-@import '../../assets/styles/main/variables/colors';
-
-@import '../../assets/styles/main/components/stream/stream';
-</style>

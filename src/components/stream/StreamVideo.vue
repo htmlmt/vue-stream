@@ -2,11 +2,12 @@
     <div class="stream-chat__stream">
         <iframe
             :src="streamUrl"
-            height="100%"
-            width="100%"
+            allowfullscreen="true"
             frameborder="0"
+            height="100%"
             scrolling="no"
-            allowfullscreen="true">
+            width="100%"
+        >
         </iframe>
     </div>
 </template>

@@ -1,46 +1,91 @@
 <template lang="html">
     <nav>
-        <ul class="nav__buttons">
-            <li class="buttons__both hide-on-mobile">
-                <button @click="showPanels(['stream', 'chat'])" :class="panels.stream && panels.chat ? 'active' : ''">
-                    <Icon
-                    icon-name="stream and chat"
-                    >
+        <ButtonList>
+            <ButtonListItem class="
+                hidden
+
+                lg:block
+                lg:border-l
+            ">
+                <Button
+                    :class="panels.stream && panels.chat ? 'active' : ''"
+                    :panelsToShow="['stream', 'chat']"
+                >
+                    <Icon icon-name="stream and chat">
                         <g v-html="getIconByName('stream and chat')"></g>
                     </Icon>
                     <span>Stream and chat</span>
-                </button>
-            </li>
-            <li class="buttons__stream">
-                <button @click="showPanels(['stream'])" :class="panels.stream && panels.chat === false ? 'active' : ''">
-                    <Icon
-                    icon-name="stream"
-                    >
+                </Button>
+            </ButtonListItem>
+            <ButtonListItem
+                class="
+                    rounded-t-lg
+
+                    lg:rounded-none
+                "
+            >
+                <Button
+                    :class="panels.stream && panels.chat === false ? 'active' : ''"
+                    :panelsToShow="['stream']"
+                >
+                    <Icon icon-name="stream">
                         <g v-html="getIconByName('stream')"></g>
                     </Icon>
                     <span>Stream only</span>
-                </button>
-            </li>
-            <li class="buttons__chat">
-                <button @click="showPanels(['chat'])" :class="panels.chat && panels.stream === false ? 'active' : ''">
-                    <Icon
-                    icon-name="chat"
-                    >
+                </Button>
+            </ButtonListItem>
+            <ButtonListItem
+                class="
+                    rounded-b-lg
+
+                    lg:rounded-none
+                "
+            >
+                <Button
+                    :class="panels.chat && panels.stream === false ? 'active' : ''"
+                    :panelsToShow="['chat']"
+                >
+                    <Icon icon-name="chat">
                         <g v-html="getIconByName('chat')"></g>
                     </Icon>
                     <span>Chat only</span>
-                </button>
-            </li>
-        </ul>
-        <button href="/" class="nav__cancel hide-on-desktop" @click.prevent="toggleModal">
+                </Button>
+            </ButtonListItem>
+        </ButtonList>
+        <button
+            class="
+                nav__cancel
+
+                border
+                border-gray-400
+                fixed
+                opacity-0
+                px-2
+                py-3
+                rounded-lg
+                text-left
+                text-red-400
+
+                lg:hidden
+            "
+            @click.prevent="toggleModal"
+        >
             <span>Cancel</span>
         </button>
-        <button href="/" class="nav__toggle hide-on-desktop" @click.prevent="toggleModal">
+        <button
+            class="
+                nav__toggle
+
+                lg:hidden
+            "
+            @click.prevent="toggleModal"
+        >
             <Icon
-            icon-name="menu"
-            icon-color="#468302"
+                icon-color="#468302"
+                icon-name="menu"
             >
-                <g v-html="getIconByName('menu')"></g>
+                <g v-html="getIconByName('menu')">
+                </g>
             </Icon>
         </button>
     </nav>
@@ -50,15 +95,13 @@
 import FetchIcons from '@/data/fetch-icons';
 
 import Icon from '@/components/atoms/Icon.vue';
+import ButtonList from '@/components/atoms/ButtonList.vue';
+import ButtonListItem from '@/components/atoms/ButtonListItem.vue';
+import Button from '@/components/atoms/Button.vue';
 
 export default {
     extends: FetchIcons,
     methods: {
-        showPanels(panelsToShow) {
-            document.body.classList.toggle('overlay');
-
-            this.$store.commit("updatePanels", panelsToShow);
-        },
         toggleModal() {
             document.body.classList.toggle('overlay');
         },
@@ -73,6 +116,9 @@ export default {
     ],
     components: {
         Icon,
+        ButtonList,
+        ButtonListItem,
+        Button,
     },
 };
 </script>
@@ -85,4 +131,8 @@ export default {
 @import '../../assets/styles/main/mixins/media-queries';
 
 @import '../../assets/styles/main/components/stream/stream-navigation';
+
+.nav__cancel {
+    background-color: white;
+}
 </style>

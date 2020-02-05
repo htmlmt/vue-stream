@@ -17,11 +17,11 @@ export default {
         panelClasses() {
             let panels = this.$store.state.panels;
             if (panels.stream && panels.chat === false) {
-                return 'streamer__stream-chat stream';
+                return 'streamer__stream-chat stream bg-gray-400 border-b border-t border-gray-400 flex flex-1 flex-wrap items-stretch w-full';
             } else if (panels.chat && panels.stream === false) {
-                return 'streamer__stream-chat chat';
+                return 'streamer__stream-chat chat bg-gray-400 border-b border-t border-gray-400 flex flex-1 flex-wrap items-stretch w-full';
             } else {
-                return 'streamer__stream-chat';
+                return 'streamer__stream-chat bg-gray-400 border-b border-t border-gray-400 flex flex-1 flex-wrap items-stretch w-full';
             }
         }
     },
@@ -31,7 +31,3 @@ export default {
     },
 };
 </script>
-
-<style lang="less">
-
-</style>

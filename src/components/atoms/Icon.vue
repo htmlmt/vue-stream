@@ -1,16 +1,20 @@
 <template lang="html">
-    <svg xmlns="http://www.w3.org/2000/svg"
-    :width="width"
-    :height="height"
-    viewBox="0 0 30 30"
-    :aria-labelledby="iconName | lowercaseNoSpaces"
-    role="presentation"
+    <svg
+        :aria-labelledby="iconName | lowercaseNoSpaces"
+        :height="height"
+        :width="width"
+        role="presentation"
+        viewBox="0 0 30 30"
+        xmlns="http://www.w3.org/2000/svg"
     >
     <title
-    :id="iconName | lowercaseNoSpaces"
-    lang="en"
+        :id="iconName | lowercaseNoSpaces"
+        lang="en"
     >{{ iconName }} icon</title>
-        <g class="icon-fill" :style="{ fill: iconColor }">
+        <g
+            :style="{ fill: iconColor }"
+            class="icon-fill"
+        >
             <slot />
         </g>
     </svg>
@@ -33,7 +37,7 @@ export default {
         },
         iconColor: {
             type: String,
-            default: 'var(--gray-400)',
+            default: 'black',
         },
     },
     filters: {
