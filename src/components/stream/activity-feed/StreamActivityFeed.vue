@@ -163,48 +163,31 @@ import StreamActivityItemText from '@/components/stream/activity-feed/StreamActi
 import moment from 'moment';
 import numeral from 'numeral';
 
+import { mapState } from 'vuex';
+
 export default {
     extends: FetchIcons,
-    data() {
-        return {
-            participantID: -1,
-        };
-    },
-    computed: {
-        items() {
-            let data = this;
-
-            let result = this.$store.state.data.participants.find(function(object) {
-                return object.participantID === data.participantID;
-            });
-
-            if (!result) {
-                return [
-                    {
-                        title: 'No activity',
-                        message: 'Hey! You should be the first to donate to this participant.',
-                        type: 'donation',
-                        amount: 0,
-                        noActivity: 'This participant has nothing to report.'
-                    }
-                ];
-            } else {
-                return result.activity;
-            }
-        },
-    },
     mounted() {
         let searchParams = new URLSearchParams(window.location.search.substring(1));
 
-        let participantID = searchParams.get('participantID');
+        let participantID = parseInt(searchParams.get('participantID'));
 
-        this.participantID = parseInt(participantID);
+        this.$store.commit('setCurrentParticipantID', {
+            currentParticipantID: participantID
+        });
 
-        if (participantID) {
-            this.$store.commit('fetchParticipantActivity', {
-                participantID: participantID
-            });
-        }
+        this.$store.commit('fetchParticipant', {
+            participantID: participantID
+        });
+
+        this.$store.commit('fetchParticipantActivity', {
+            participantID: participantID
+        });
+    },
+    computed: {
+        ...mapState({
+            items: 'currentParticipantActivity'
+        })
     },
     filters: {
         formatDate(date) {

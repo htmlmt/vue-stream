@@ -12,7 +12,13 @@
         "
     >
         <StreamHeader title="Stream" />
-        <StreamContent channel="drlupo" />
+        <StreamContent
+            :channel="currentParticipantStreamLink"
+            v-if="currentParticipantStreamLink"
+        />
+        <StreamEmpty
+            v-if="currentParticipantStreamLink == ''"
+        />
         <StreamActivityFeed filter="AND({Instance} = 'demo', {Type} = 'Badge')" />
     </article>
 </template>
@@ -21,12 +27,21 @@
 import StreamHeader from '@/components/stream/StreamHeader.vue';
 import StreamContent from '@/components/stream/StreamContent.vue';
 import StreamActivityFeed from '@/components/stream/activity-feed/StreamActivityFeed.vue';
+import StreamEmpty from '@/components/stream/StreamEmpty.vue';
+
+import { mapState } from 'vuex';
 
 export default {
     components: {
         StreamHeader,
         StreamContent,
         StreamActivityFeed,
+        StreamEmpty,
+    },
+    computed: {
+        ...mapState({
+            currentParticipantStreamLink: 'currentParticipantStreamLink'
+        })
     },
 };
 </script>

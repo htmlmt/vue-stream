@@ -54,7 +54,7 @@ export default {
     props: {
         text: {
             type: String,
-            default: 'CTA',
+            default: 'Donate',
         },
         link: {
             type: String,

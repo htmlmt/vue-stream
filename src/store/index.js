@@ -11,14 +11,24 @@ export default new Vuex.Store({
             chat: true,
         },
         apiUrl: 'https://try.donordrive.com/api',
-        data: {
-            participants: [],
-        }
+        currentParticipantID: 0,
+        currentParticipant: {},
+        currentParticipantActivity: [
+            {
+                title: 'No activity',
+                message: 'Hey! You should be the first to donate to this participant.',
+                type: 'donation',
+                amount: 0,
+                noActivity: 'This participant has nothing to report.',
+            }
+        ],
+        currentParticipantStreamLink: '',
+        participants: [],
     },
     getters: {
         stream: state => {
-            return state.panels.stream
-        }
+            return state.panels.stream;
+        },
     },
     mutations: {
         updatePanels(state, payload) {
@@ -32,52 +42,35 @@ export default new Vuex.Store({
                 }
             }
         },
+        setCurrentParticipantID(state, payload) {
+            state.currentParticipantID = payload.currentParticipantID;
+        },
         fetchParticipant(state, payload) {
             let participantID = payload.participantID;
-            let participant = findParticipantWithinData(state.data.participants, participantID);
 
-            if (!participant) {
-                axios({
-                    url: `${state.apiUrl}/participants/${participantID}`,
-                    auth: {
-                        username: process.env.VUE_APP_DONORDRIVE_USERNAME,
-                        password: process.env.VUE_APP_DONORDRIVE_PASSWORD,
-                    },
-                }).then((res) => {
-                    state.data.participants.push(res.data);
-                });
-            }
+            axios({
+                url: `${state.apiUrl}/participants/${participantID}`,
+            }).then((res) => {
+                state.currentParticipant = res.data;
+                if (res.data.links.stream) {
+                    if (res.data.links.stream.includes('twitch')) {
+                        let param = res.data.links.stream.split('?')[1];
+                        let twitchUsername = param.substring(8, param.length);
+                        state.currentParticipantStreamLink = twitchUsername;
+                    }
+                }
+            });
         },
         fetchParticipantActivity(state, payload) {
             let participantID = payload.participantID;
-            let participant = findParticipantWithinData(state.data.participants, participantID);
 
-            let runFetch = false;
-
-            if (!participant) {
-                runFetch = true;
-            } else {
-                if (!participant.activity) {
-                    runFetch = true;
+            axios({
+                url: `${state.apiUrl}/participants/${participantID}/activity`,
+            }).then((res) => {
+                if (res.data.length) {
+                    state.currentParticipantActivity = res.data;
                 }
-            }
-
-            if (runFetch) {
-                axios({
-                    url: `${state.apiUrl}/participants/${participantID}/activity`,
-                    auth: {
-                        username: process.env.VUE_APP_DONORDRIVE_USERNAME,
-                        password: process.env.VUE_APP_DONORDRIVE_PASSWORD,
-                    },
-                }).then((res) => {
-                    state.data.participants.push(
-                        {
-                            activity: res.data,
-                            participantID: parseInt(participantID),
-                        }
-                    );
-                });
-            }
+            });
         },
     },
     actions: {
@@ -85,15 +78,3 @@ export default new Vuex.Store({
     modules: {
     },
 });
-
-function findObjectByValue(array, key, value) {
-    var result = array.find(obj => {
-        return obj[key] === value
-    });
-
-    return result;
-}
-
-function findParticipantWithinData(participants, participantID) {
-    return findObjectByValue(participants, 'participantID', participantID);
-}
