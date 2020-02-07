@@ -143,7 +143,7 @@
                     icon-color="white"
                     icon-name="donate"
                 >
-                    <g v-html="getIconByName('donate')"></g>
+                    <!-- <g v-html="getIconByName('donate')"></g> -->
                 </Icon>
             </LinkCTA>
         </div>
@@ -151,8 +151,6 @@
 </template>
 
 <script>
-import FetchIcons from '@/data/fetch-icons';
-
 import LinkCTA from '@/components/atoms/LinkCTA.vue';
 import Icon from '@/components/atoms/Icon.vue';
 
@@ -163,14 +161,14 @@ import StreamActivityItemText from '@/components/stream/activity-feed/StreamActi
 import moment from 'moment';
 import numeral from 'numeral';
 
-import { mapState } from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
-    extends: FetchIcons,
     computed: {
-        ...mapState({
-            items: 'currentParticipantActivity'
-        })
+        ...mapGetters([
+            'items',
+            'icons',
+        ]),
     },
     filters: {
         formatDate(date) {

@@ -92,24 +92,30 @@
 </template>
 
 <script>
-import FetchIcons from '@/data/fetch-icons';
-
 import Icon from '@/components/atoms/Icon.vue';
 import ButtonList from '@/components/atoms/ButtonList.vue';
 import ButtonListItem from '@/components/atoms/ButtonListItem.vue';
 import Button from '@/components/atoms/Button.vue';
 
+import { mapGetters } from 'vuex';
+
 export default {
-    extends: FetchIcons,
     methods: {
         toggleModal() {
             document.body.classList.toggle('overlay');
         },
+        getIconByName(name) {
+            if (this.icons.length) {
+                return this.icons.find(icon => icon.fields.Name === name).fields.Code;
+            }
+            return '';
+        },
     },
     computed: {
-        panels() {
-            return this.$store.state.panels;
-        }
+        ...mapGetters([
+            'panels',
+            'icons',
+        ]),
     },
     props: [
         'filter',

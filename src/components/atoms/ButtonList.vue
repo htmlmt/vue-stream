@@ -15,12 +15,14 @@
 		list-none
 		mx-auto
 		my-0
+		mt-1
 		pointer-events-none
 		rounded-lg
 
 		lg:border-0
 		lg:bottom-auto
 		lg:mx-0
+		lg:mt-0
 		lg:pointer-events-auto
 		lg:relative
 		lg:w-auto

@@ -29,7 +29,7 @@ import StreamContent from '@/components/stream/StreamContent.vue';
 import StreamActivityFeed from '@/components/stream/activity-feed/StreamActivityFeed.vue';
 import StreamEmpty from '@/components/stream/StreamEmpty.vue';
 
-import { mapState } from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
     components: {
@@ -38,32 +38,11 @@ export default {
         StreamActivityFeed,
         StreamEmpty,
     },
-    methods: {
-        fetchParticipantData() {
-            const searchParams = new URLSearchParams(window.location.search.substring(1));
-
-            const participantID = parseInt(searchParams.get('participantID'));
-
-            this.$store.commit('setCurrentParticipantID', {
-                currentParticipantID: participantID
-            });
-
-            this.$store.commit('fetchParticipant', {
-                participantID: participantID
-            });
-
-            this.$store.commit('fetchParticipantActivity', {
-                participantID: participantID
-            });
-        }
-    },
-    created() {
-        this.fetchParticipantData();
-    },
     computed: {
-        ...mapState({
-            currentParticipantStreamLink: 'currentParticipantStreamLink'
-        })
+        ...mapGetters([
+            'currentParticipantStreamLink',
+            'isLoading',
+        ]),
     },
 };
 </script>
