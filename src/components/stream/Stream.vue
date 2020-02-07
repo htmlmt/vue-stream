@@ -41,7 +41,6 @@ export default {
     computed: {
         ...mapGetters([
             'currentParticipantStreamLink',
-            'isLoading',
         ]),
     },
 };

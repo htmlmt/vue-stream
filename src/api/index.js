@@ -1,10 +1,21 @@
 import axios from 'axios';
 
 const fetchCurrentParticipant = (id) => new Promise((resolve) => {
-	console.log(id);
-
 	if (id) {
 		axios.get(`https://try.donordrive.com/api/participants/${id}`)
+		.then((response) => {
+			resolve(response.data);
+		})
+		.catch((error) => {
+			// eslint-ignore-next-line
+			console.error(error);
+		});
+	}
+});
+
+const fetchCurrentParticipantActivity = (id) => new Promise((resolve) => {
+	if (id) {
+		axios.get(`https://try.donordrive.com/api/participants/${id}/activity`)
 		.then((response) => {
 			resolve(response.data);
 		})
@@ -37,4 +48,4 @@ const fetchIcons = (instance) => new Promise((resolve) => {
 	});
 });
 
-export { fetchCurrentParticipant, fetchIcons };
+export { fetchCurrentParticipant, fetchCurrentParticipantActivity, fetchIcons };

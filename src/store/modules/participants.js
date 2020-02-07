@@ -1,4 +1,5 @@
 import { fetchCurrentParticipant } from '@/api';
+import { fetchCurrentParticipantActivity } from '@/api';
 
 const defaultState = {
 	currentParticipant: null,
@@ -25,8 +26,6 @@ const defaultState = {
 
 const actions = {
 	getCurrentParticipant: ({ commit }, data) => {
-		commit( 'setLoadingStatus', true );
-
 		const id = data.id;
 
 		fetchCurrentParticipant(id)
@@ -46,10 +45,17 @@ const actions = {
 						commit( 'setCurrentParticipantStreamLink', twitchUsername );
 					}
 				}
-
 			}
 
-			commit( 'setLoadingStatus', false );
+			fetchCurrentParticipantActivity(id)
+			.then((response) => {
+				console.log(response);
+				commit( 'setCurrentParticipantActivity', response );
+			})
+			.catch((error) => {
+				// eslint-disable-next-line
+				console.error(error);
+			});
 		})
 		.catch((error) => {
 			// eslint-disable-next-line
@@ -59,9 +65,6 @@ const actions = {
 }
 
 const mutations = {
-	setLoadingStatus( state, isLoading ) {
-		state.isLoading = isLoading;
-	},
 	setCurrentParticipant( state, participant ) {
 		state.currentParticipant = participant;
 	},
@@ -77,7 +80,6 @@ const mutations = {
 }
 
 const getters = {
-	isLoading: state => state.isLoading,
 	currentParticipantId: state => state.currentParticipantId,
 	currentParticipant: state => state.currentParticipant,
 	currentParticipantStreamLink: state => state.currentParticipantStreamLink,
