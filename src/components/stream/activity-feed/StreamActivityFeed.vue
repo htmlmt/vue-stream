@@ -167,23 +167,6 @@ import { mapState } from 'vuex';
 
 export default {
     extends: FetchIcons,
-    mounted() {
-        let searchParams = new URLSearchParams(window.location.search.substring(1));
-
-        let participantID = parseInt(searchParams.get('participantID'));
-
-        this.$store.commit('setCurrentParticipantID', {
-            currentParticipantID: participantID
-        });
-
-        this.$store.commit('fetchParticipant', {
-            participantID: participantID
-        });
-
-        this.$store.commit('fetchParticipantActivity', {
-            participantID: participantID
-        });
-    },
     computed: {
         ...mapState({
             items: 'currentParticipantActivity'

@@ -23,7 +23,6 @@ export default new Vuex.Store({
             }
         ],
         currentParticipantStreamLink: '',
-        participants: [],
     },
     getters: {
         stream: state => {
@@ -46,7 +45,7 @@ export default new Vuex.Store({
             state.currentParticipantID = payload.currentParticipantID;
         },
         fetchParticipant(state, payload) {
-            let participantID = payload.participantID;
+            const participantID = payload.participantID;
 
             axios({
                 url: `${state.apiUrl}/participants/${participantID}`,
@@ -54,15 +53,15 @@ export default new Vuex.Store({
                 state.currentParticipant = res.data;
                 if (res.data.links.stream) {
                     if (res.data.links.stream.includes('twitch')) {
-                        let param = res.data.links.stream.split('?')[1];
-                        let twitchUsername = param.substring(8, param.length);
+                        const param = res.data.links.stream.split('?')[1];
+                        const twitchUsername = param.substring(8, param.length);
                         state.currentParticipantStreamLink = twitchUsername;
                     }
                 }
             });
         },
         fetchParticipantActivity(state, payload) {
-            let participantID = payload.participantID;
+            const participantID = payload.participantID;
 
             axios({
                 url: `${state.apiUrl}/participants/${participantID}/activity`,
