@@ -14,7 +14,7 @@
 
 <script>
 export default {
-    name: 'StreamVideo',
+    name: "StreamVideo",
     props: {
         channel: String,
     },
@@ -27,9 +27,9 @@ export default {
 </script>
 
 <style lang="less">
-@import '../../assets/styles/main/variables/screen-sizes';
+@import '../../../assets/styles/main/variables/screen-sizes';
 
-@import '../../assets/styles/main/mixins/media-queries';
+@import '../../../assets/styles/main/mixins/media-queries';
 
-@import '../../assets/styles/main/components/stream/stream-video';
+@import '../../../assets/styles/main/components/organisms/stream/stream-video';
 </style>

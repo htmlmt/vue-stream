@@ -22,10 +22,23 @@
 
 <script>
 export default {
+    name: "BaseIcon",
+    filters: {
+        lowercaseNoSpaces(value) {
+            if (!value) {
+                return "";
+            }
+
+            return value.toLowerCase()
+            .replace(/[-_]+/g, " ")
+            .replace(/[^\w\s]/g, "")
+            .replace(/ /g, "");
+        },
+    },
     props: {
         iconName: {
             type: String,
-            default: 'icon',
+            default: "icon",
         },
         width: {
             type: [Number, String],
@@ -37,19 +50,7 @@ export default {
         },
         iconColor: {
             type: String,
-            default: 'black',
-        },
-    },
-    filters: {
-        lowercaseNoSpaces(value) {
-            if (!value) {
-                return '';
-            }
-
-            return value.toLowerCase()
-            .replace(/[-_]+/g, ' ')
-            .replace(/[^\w\s]/g, '')
-            .replace(/ /g, '');
+            default: "black",
         },
     },
 };

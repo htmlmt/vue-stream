@@ -20,26 +20,26 @@
 
 <script>
 export default {
-	name: 'Button',
-	methods: {
-        showPanels(panelsToShow) {
-            document.body.classList.toggle('overlay');
-
-            this.$store.commit("updatePanels", panelsToShow);
-        },
-	},
+	name: "BaseButton",
 	props: {
 		panelsToShow: {
             type: Array,
         },
-	}
+	},
+	methods: {
+        showPanels(panelsToShow) {
+            document.body.classList.toggle("overlay");
+
+            this.$store.commit("updatePanels", panelsToShow);
+        },
+	},
 }
 </script>
 
-<style scoped lang="less">
-@import '../../assets/styles/main/variables/screen-sizes';
+<style lang="less">
+@import "../../assets/styles/main/variables/screen-sizes";
 
-@import '../../assets/styles/main/mixins/media-queries';
+@import "../../assets/styles/main/mixins/media-queries";
 
 button {
 	-webkit-appearance: none;

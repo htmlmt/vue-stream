@@ -16,12 +16,12 @@
 
 <script>
 export default {
-	name: 'ButtonListItem',
+	name: "ButtonListItem",
 }
 </script>
 
-<style scoped lang="less">
-	li {
-		background-color: white;
-	}
+<style lang="less">
+li {
+	background-color: white;
+}
 </style>

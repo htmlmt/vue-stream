@@ -7,15 +7,15 @@
                 lg:block
                 lg:border-l
             ">
-                <Button
+                <BaseButton
                     :class="panels.stream && panels.chat ? 'active' : ''"
                     :panelsToShow="['stream', 'chat']"
                 >
-                    <Icon icon-name="stream and chat">
+                    <BaseIcon icon-name="stream and chat">
                         <g v-html="getIconByName('stream and chat')"></g>
-                    </Icon>
+                    </BaseIcon>
                     <span>Stream and chat</span>
-                </Button>
+                </BaseButton>
             </ButtonListItem>
             <ButtonListItem
                 class="
@@ -24,15 +24,15 @@
                     lg:rounded-none
                 "
             >
-                <Button
+                <BaseButton
                     :class="panels.stream && panels.chat === false ? 'active' : ''"
                     :panelsToShow="['stream']"
                 >
-                    <Icon icon-name="stream">
+                    <BaseIcon icon-name="stream">
                         <g v-html="getIconByName('stream')"></g>
-                    </Icon>
+                    </BaseIcon>
                     <span>Stream only</span>
-                </Button>
+                </BaseButton>
             </ButtonListItem>
             <ButtonListItem
                 class="
@@ -41,15 +41,15 @@
                     lg:rounded-none
                 "
             >
-                <Button
+                <BaseButton
                     :class="panels.chat && panels.stream === false ? 'active' : ''"
                     :panelsToShow="['chat']"
                 >
-                    <Icon icon-name="chat">
+                    <BaseIcon icon-name="chat">
                         <g v-html="getIconByName('chat')"></g>
-                    </Icon>
+                    </BaseIcon>
                     <span>Chat only</span>
-                </Button>
+                </BaseButton>
             </ButtonListItem>
         </ButtonList>
         <button
@@ -80,63 +80,61 @@
             "
             @click.prevent="toggleModal"
         >
-            <Icon
+            <BaseIcon
                 icon-color="#468302"
                 icon-name="menu"
             >
                 <g v-html="getIconByName('menu')">
                 </g>
-            </Icon>
+            </BaseIcon>
         </button>
     </nav>
 </template>
 
 <script>
-import Icon from '@/components/atoms/Icon.vue';
-import ButtonList from '@/components/atoms/ButtonList.vue';
-import ButtonListItem from '@/components/atoms/ButtonListItem.vue';
-import Button from '@/components/atoms/Button.vue';
+import BaseButton from "@/components/atoms/BaseButton.vue";
+import BaseIcon from "@/components/atoms/BaseIcon.vue";
+import ButtonList from "@/components/atoms/ButtonList.vue";
+import ButtonListItem from "@/components/atoms/ButtonListItem.vue";
 
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 
 export default {
+    name: "StreamNavigation",
+    components: {
+        BaseButton,
+        BaseIcon,
+        ButtonList,
+        ButtonListItem,
+    },
+    computed: {
+        ...mapGetters([
+            "panels",
+            "icons",
+        ]),
+    },
     methods: {
         toggleModal() {
-            document.body.classList.toggle('overlay');
+            document.body.classList.toggle("overlay");
         },
         getIconByName(name) {
             if (this.icons.length) {
                 return this.icons.find(icon => icon.fields.Name === name).fields.Code;
             }
-            return '';
+            return "";
         },
-    },
-    computed: {
-        ...mapGetters([
-            'panels',
-            'icons',
-        ]),
-    },
-    props: [
-        'filter',
-    ],
-    components: {
-        Icon,
-        ButtonList,
-        ButtonListItem,
-        Button,
     },
 };
 </script>
 
 <style lang="less">
-@import '../../assets/styles/main/variables/screen-sizes';
-@import '../../assets/styles/main/variables/elements';
-@import '../../assets/styles/main/variables/colors';
+@import "../../../assets/styles/main/variables/screen-sizes";
+@import "../../../assets/styles/main/variables/elements";
+@import "../../../assets/styles/main/variables/colors";
 
-@import '../../assets/styles/main/mixins/media-queries';
+@import "../../../assets/styles/main/mixins/media-queries";
 
-@import '../../assets/styles/main/components/stream/stream-navigation';
+@import "../../../assets/styles/main/components/organisms/stream/stream-navigation";
 
 .nav__cancel {
     background-color: white;

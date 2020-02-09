@@ -50,27 +50,27 @@
 
 <script>
 export default {
-    name: 'LinkCTA',
+    name: "LinkCTA",
     props: {
         text: {
             type: String,
-            default: 'Donate',
+            default: "Donate",
         },
         link: {
             type: String,
-            default: '#',
+            default: "#",
         },
-    }
+    },
 };
 </script>
 
 <style lang="less">
-@import '../../assets/styles/main/variables/colors';
-@import '../../assets/styles/main/variables/elements';
-@import '../../assets/styles/main/variables/fonts';
-@import '../../assets/styles/main/variables/screen-sizes';
+@import "../../assets/styles/main/variables/colors";
+@import "../../assets/styles/main/variables/elements";
+@import "../../assets/styles/main/variables/fonts";
+@import "../../assets/styles/main/variables/screen-sizes";
 
-@import '../../assets/styles/main/mixins/media-queries';
+@import "../../assets/styles/main/mixins/media-queries";
 
 .button {
     color: white;

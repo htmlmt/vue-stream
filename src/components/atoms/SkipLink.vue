@@ -6,7 +6,7 @@
 
 <script>
 export default {
-    name: 'SkipLink',
+    name: "SkipLink",
     props: {
         content: String,
     },
@@ -14,5 +14,5 @@ export default {
 </script>
 
 <style lang="less">
-@import '../../assets/styles/main/components/atoms/skip-link';
+@import "../../assets/styles/main/components/atoms/skip-link";
 </style>

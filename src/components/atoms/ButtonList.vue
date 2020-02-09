@@ -33,6 +33,6 @@
 
 <script>
 export default {
-	name: 'ButtonList',
+	name: "ButtonList",
 }
 </script>

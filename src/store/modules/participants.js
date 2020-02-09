@@ -49,8 +49,9 @@ const actions = {
 
 			fetchCurrentParticipantActivity(id)
 			.then((response) => {
-				console.log(response);
-				commit( 'setCurrentParticipantActivity', response );
+				if (response.length) {
+					commit( 'setCurrentParticipantActivity', response );
+				}
 			})
 			.catch((error) => {
 				// eslint-disable-next-line

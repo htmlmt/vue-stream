@@ -18,7 +18,7 @@
 
 <script>
 export default {
-    name: 'StreamActivityFeedList',
+    name: "ActivityList",
     props: {
         totalItems: {
             type: Number,

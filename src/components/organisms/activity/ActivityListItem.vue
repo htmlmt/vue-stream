@@ -22,7 +22,7 @@
 
 <script>
 export default {
-	name: 'StreamActivityFeedListItem',
+	name: "ActivityListItem",
     props: {
         totalItems: {
             type: Number,

@@ -1,26 +1,27 @@
 <template lang="html">
 	<div>
 		<SkipLink content="Skip to main content" />
-        <Stream />
+        <TheStream />
 	</div>
 </template>
 
 <script>
-import SkipLink from '@/components/atoms/SkipLink';
-import Stream from '@/components/stream/Stream';
+import SkipLink from "@/components/atoms/SkipLink";
+
+import TheStream from "@/components/organisms/stream/TheStream";
 
 export default {
-	name: 'HomeView',
+	name: "ParticipantView",
 	components: {
 		SkipLink,
-		Stream,
+		TheStream,
 	},
 	created() {
-		this.$store.dispatch('getCurrentParticipant', {
+		this.$store.dispatch("getCurrentParticipant", {
 			id: this.$route.params.id
 		});
-		this.$store.dispatch('getIcons', {
-			instance: 'demo'
+		this.$store.dispatch("getIcons", {
+			instance: "demo"
 		});
 	},
 };
